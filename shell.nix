@@ -5,6 +5,6 @@ pkgs.mkShell {
   packages = with pkgs;[ 
   nodePackages.pnpm
   nodejs
-  web-ext
+  # web-ext
   ];
 }

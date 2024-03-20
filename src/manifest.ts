@@ -14,7 +14,8 @@ export async function getManifest() {
     version: pkg.version,
     description: pkg.description,
     action: {
-      default_icon: './assets/icon-512.png',
+      // default_icon: './assets/icon-512.png',
+      default_icon: './assets/logo_docs1.svg',
       default_popup: './dist/popup/index.html',
     },
     options_ui: {
@@ -23,22 +24,30 @@ export async function getManifest() {
     },
     background: isFirefox
       ? {
-          scripts: ['dist/background/index.mjs'],
-          type: 'module',
-        }
+        scripts: [
+          // 'dist/background/index.mjs',
+          'dist/background/index.mjs',
+          // 'dist/background/token.mjs',
+          // 'dist/background/parser.mjs',
+        ],
+        type: 'module',
+      }
       : {
-          service_worker: './dist/background/index.mjs',
-        },
+        service_worker: './dist/background/index.mjs',
+      },
     icons: {
       16: './assets/icon-512.png',
       48: './assets/icon-512.png',
       128: './assets/icon-512.png',
     },
-    permissions: [
-      'tabs',
-      'storage',
+
+  "permissions": [
       'activeTab',
-    ],
+    "webRequest",
+    "storage",
+    "menus",
+    "tabs"
+  ],
     host_permissions: ['*://*/*'],
     content_scripts: [
       {
@@ -49,7 +58,35 @@ export async function getManifest() {
           'dist/contentScripts/index.global.js',
         ],
       },
+      {
+        "matches": [
+          "https://*.advance-docs.ru/Assistant",
+          "https://*.adv-docs.ru/Assistant"
+        ],
+        "js": [
+          "dist/docs/content_assistant.js",
+          "dist/docs/actions_assistant.js"
+        ],
+        // "css": [
+        //   "advance/style/content_assistant.css"
+        // ]
+      },
+      {
+        "matches": [
+          "https://srd.fsa.gov.ru/srd"
+        ],
+        "js": [
+          // "dist/utils/spiner/init.js",
+          "dist/fgis/index.fgis.js"
+        ],
+        // "css": [
+        //   "utils/spiner/style.css",
+        //   "fgis/style.css"
+        // ]
+      }
+
     ],
+
     web_accessible_resources: [
       {
         resources: ['dist/contentScripts/style.css'],

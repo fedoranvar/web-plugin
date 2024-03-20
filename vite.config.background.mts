@@ -22,7 +22,7 @@ export default defineConfig({
     emptyOutDir: false,
     sourcemap: isDev ? 'inline' : false,
     lib: {
-      entry: r('src/background/main.ts'),
+      entry: r('src/background/index.ts'),
       name: packageJson.name,
       formats: ['iife'],
     },
