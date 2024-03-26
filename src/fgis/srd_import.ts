@@ -141,13 +141,17 @@
 
   function signDocument(
     urlText,
-    advanceSettingIndexInput,
-    advanceSettingTypeInput,
-    advanceSettingPwdInput,
+    index,
+    type,
+    password,
+    
   ) {
-    const indexCertif = advanceSettingIndexInput.value;
-    const algorithm = advanceSettingTypeInput.value;
-    const pwdCertif = advanceSettingPwdInput.value || "";
+    // const indexCertif = advanceSettingIndexInput.value;
+    // const algorithm = advanceSettingTypeInput.value;
+    // const pwdCertif = advanceSettingPwdInput.value || "";
+    const indexCertif = index;
+    const algorithm = type;
+    const pwdCertif = password;
 
     if (!indexCertif || (!algorithm && algorithm !== 0)) {
       alert('Поля Индекс и Тип обязательны к заполнению');
@@ -261,5 +265,6 @@
 
   export {
     sendDocument,
-    downloadDocument
+    downloadDocument,
+    signDocument
   }

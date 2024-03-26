@@ -1,31 +1,26 @@
 <script setup lang="ts">
-import { storageDemo, canSign, docLink, docIndex, docType, docPin } from '~/logic/storage'
+import {canSign, docLink, docIndex, docType, docPin } from '~/logic/storage'
 
 import { sendDocument, downloadDocument } from  '~/fgis/srd_import'
 
 function openOptionsPage() {
-  console.log('opened options')
   browser.runtime.openOptionsPage()
 }
 </script>
 
 <template>
   <main class="w-[500px] px-4 py-5 text-center text-gray-700">
-    <button class="absolute icon-btn mt-2   mx-2 text-2xl right-0 top-0" @click="openOptionsPage"> <mi-settings />
-    </button>
+    <button class="absolute icon-btn mt-2   mx-2 text-2xl right-0 top-0" @click="openOptionsPage"> <mi-settings /> </button>
     <Logo />
-    <SharedSubtitle />
 
-    <!--
-    <div class="mt-2">
-      <span class="opacity-50">Storage:</span> {{ storageDemo }}
-      <span class="opacity-50">canSign:</span> {{ canSign }}
-    </div>
-    -->
+    <label for="docLink" class="block relative text-left mb-2 text-sm font-medium text-gray-900 dark:text-white">Ссылка
+        <button class=" mx-2 mt-2 text-xs right-0  absolute  text-blue-700  hover:bg-yellow-300" @click="docLink = ''"> очистить </button>
+    </label>
 
-    <label for="docLink" class="block text-left mb-2 text-sm font-medium text-gray-900 dark:text-white">Ссылка</label>
-    <input type="text" placeholder="http://*.advance-docs.ru/..." id="docLink" v-model="docLink"
+
+    <textarea rows="3" placeholder="http://*.advance-docs.ru/..." id="docLink" v-model="docLink"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </textarea>
 
       
     <div class="block m-4 ">

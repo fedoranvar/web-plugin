@@ -25,8 +25,8 @@ export async function getManifest() {
     background: isFirefox
       ? {
         scripts: [
-          // 'dist/background/index.mjs',
           'dist/background/index.mjs',
+          // 'dist/background/index.mjs',
           // 'dist/background/token.mjs',
           // 'dist/background/parser.mjs',
         ],
@@ -52,7 +52,8 @@ export async function getManifest() {
     content_scripts: [
       {
         matches: [
-          '<all_urls>',
+          // '<all_urls>',
+          "https://srd.fsa.gov.ru/srd"
         ],
         js: [
           'dist/contentScripts/index.global.js',
@@ -71,19 +72,19 @@ export async function getManifest() {
         //   "advance/style/content_assistant.css"
         // ]
       },
-      {
-        "matches": [
-          "https://srd.fsa.gov.ru/srd"
-        ],
-        "js": [
-          // "dist/utils/spiner/init.js",
-          "dist/fgis/index.fgis.js"
-        ],
-        // "css": [
-        //   "utils/spiner/style.css",
-        //   "fgis/style.css"
-        // ]
-      }
+      // {
+      //   "matches": [
+      //     "https://srd.fsa.gov.ru/srd"
+      //   ],
+      //   "js": [
+      //     // "dist/utils/spiner/init.js",
+      //     "dist/fgis/index.fgis.js"
+      //   ],
+      //   // "css": [
+      //   //   "utils/spiner/style.css",
+      //   //   "fgis/style.css"
+      //   // ]
+      // }
 
     ],
 

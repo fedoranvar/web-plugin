@@ -1,0 +1,59 @@
+<script setup lang="ts">
+import {canSign, docLink, docIndex, docType, docPin } from '~/logic/storage'
+
+import { sendDocument, downloadDocument, signDocument } from  '~/fgis/srd_import'
+
+function openOptionsPage() {
+  browser.runtime.openOptionsPage()
+}
+
+</script>
+
+<template>
+  <!-- <main class="w-[500px] px-4 py-5 text-center text-gray-700"> -->
+    <button class="absolute icon-btn mt-2   mx-2 text-2xl right-0 top-0" @click="openOptionsPage()"> <mi-settings /> </button>
+    <Logo />
+
+    <label for="docLink" class="font-bold block relative text-left mb-2 text-sm font-medium text-gray-900 dark:text-white">Ссылка
+        <button class=" mx-2 mt-2 text-xs right-0  absolute  text-blue-700  hover:bg-yellow-300" @click="docLink = ''"> очистить </button>
+    </label>
+
+
+    <textarea rows="3"  id="docLink" v-model="docLink"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      </textarea>
+
+      
+    <div class="block m-4 ">
+
+    <button  type="button" class="inline-flex focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" @click="sendDocument(docLink)">Загрузить ДС</button>
+
+    <button  type="button" class="inline-flex text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" @click="downloadDocument(docLink)">Скачать печатную форму</button>
+
+    </div>
+
+    <div v-if='canSign' class="px-3 pb-3 mt-3 border-dotted border-sky-300 border-1 rounded-md ">
+
+      <label for="docPin" class="block text-left my-2 text-sm font-medium text-gray-900 dark:text-white">ПИН</label>
+      <input placeholder="ПИН" id="docPin" v-model="docPin"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+      
+      <label for="docIndex" class="block text-left my-2 text-sm font-medium text-gray-900 dark:text-white">Индекс</label>
+      <input placeholder="Индекс" id="docIndex" v-model="docIndex"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+      <label for="docType" class="block text-left my-2 text-sm font-medium text-gray-900 dark:text-white">Тип</label>
+      <input placeholder="Тип" id="docType" v-model="docType"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+    </div>
+
+    <div class="block m-4 ">
+<button v-if='canSign' type="button" class="inline-flex text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" @click="signDocument(docLink, docIndex,docType, docPin)"><fluent-pen-sparkle-20-regular /> Подписать</button>
+
+    </div>
+
+
+  <!-- </main> -->
+</template>

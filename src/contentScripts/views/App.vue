@@ -1,30 +1,37 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
 import 'uno.css'
+import './style.css'
 
 const [show, toggle] = useToggle(false)
+
+// import {openOptionsPage} from '~/utils/init.ts' 
+
+
+// function openOptionsPage() {
+//   browser.runtime.openOptionsPage()
+// }
+
 </script>
 
 <template>
-  <div class="fixed right-0 bottom-0 m-5 z-100 flex items-end font-sans select-none leading-1em">
-    <div
-      class="bg-white text-gray-800 rounded-lg shadow w-max h-min"
-      p="x-4 y-2"
-      m="y-auto r-2"
-      transition="opacity duration-300"
-      :class="show ? 'opacity-100' : 'opacity-0'"
-    >
-      <h1 class="text-lg">
-        Vitesse WebExt
-      </h1>
-      <SharedSubtitle />
-    </div>
+  <div id="docs-fgis"
+      class="w-[500px] px-4 py-5 text-center text-gray-700 bg-slate-50 z-900 fixed right-0" 
+          :class="show ? 'block' : 'hidden'"
+      >
+    <FgisDocsUI />
+  </div>
+
+  <Dimmer :class="show ? 'block' : 'hidden'"/>
+
     <button
-      class="flex w-10 h-10 rounded-full shadow cursor-pointer border-none"
+      class="flex  rounded-2 shadow cursor-pointer border-none fixed top-2 right-300 p-2  text-white text-lg"
       bg="teal-600 hover:teal-700"
       @click="toggle()"
     >
-      <pixelarticons-power class="block m-auto text-white text-lg" />
+
+     Загрузка ДС по ссылке
+      <!-- <pixelarticons-power class="block m-auto text-white text-lg" /> -->
     </button>
-  </div>
+
 </template>
