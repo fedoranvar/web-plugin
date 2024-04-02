@@ -17,18 +17,19 @@ export default defineConfig({
     watch: isDev
       ? {}
       : undefined,
-    outDir: r('extension/dist/fgis'),
+    outDir: r('extension/dist/docs'),
     cssCodeSplit: false,
     emptyOutDir: false,
     sourcemap: isDev ? 'inline' : false,
     lib: {
-      entry: r('src/fgis/index.ts'),
+      entry: r('src/docs/replication/index.ts'),
       name: packageJson.name,
+      // formats: ['cjs'],
       formats: ['iife'],
     },
     rollupOptions: {
       output: {
-        entryFileNames: 'srd.js',
+        entryFileNames: 'replication.js',
         extend: true,
       },
     },

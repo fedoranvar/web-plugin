@@ -1,61 +1,61 @@
 
 
   // var browser = require("webextension-polyfill");
-  function main() {
-    const parentDiv = document.querySelector('.right-side');
-    if (parentDiv === null) {
-      return setTimeout(main, 1000);
-    }
+  // function main() {
+  //   const parentDiv = document.querySelector('.right-side');
+  //   if (parentDiv === null) {
+  //     return setTimeout(main, 1000);
+  //   }
 
-    const advanceRootDiv = document.createElement('div');
-    const advanceLinkInput = createAdvanceLinkInput();
-    const advanceSettingIndexInput = createAdvanceSettingInput(
-      'advanceSettingIndexInput',
-      'Индекс',
-    );
-    const advanceSettingTypeInput = createAdvanceSettingInput('advanceSettingTypeInput', 'Тип');
-    const advanceSettingPwdInput = createAdvanceSettingInput('advanceSettingPwdInput', 'ПИН');
-    advanceSettingPwdInput.type = 'password';
+  //   const advanceRootDiv = document.createElement('div');
+  //   const advanceLinkInput = createAdvanceLinkInput();
+  //   const advanceSettingIndexInput = createAdvanceSettingInput(
+  //     'advanceSettingIndexInput',
+  //     'Индекс',
+  //   );
+  //   const advanceSettingTypeInput = createAdvanceSettingInput('advanceSettingTypeInput', 'Тип');
+  //   const advanceSettingPwdInput = createAdvanceSettingInput('advanceSettingPwdInput', 'ПИН');
+  //   advanceSettingPwdInput.type = 'password';
 
-    const advanceLinkSubmit = createAdvanceLinkSubmit(advanceLinkInput);
-    const advanceLinkSign = createAdvanceLinkSign(
-      advanceLinkInput,
-      advanceSettingIndexInput,
-      advanceSettingTypeInput,
-      advanceSettingPwdInput,
-    );
+  //   const advanceLinkSubmit = createAdvanceLinkSubmit(advanceLinkInput);
+  //   const advanceLinkSign = createAdvanceLinkSign(
+  //     advanceLinkInput,
+  //     advanceSettingIndexInput,
+  //     advanceSettingTypeInput,
+  //     advanceSettingPwdInput,
+  //   );
 
-    const advanceDownload = createAdvanceDownload(advanceLinkInput);
-    const advanceShowSettings = btnDefault();
-    advanceShowSettings.className = 'btn btn_custom btn_accent btn-icon btn-icon_settings';
-    var visibleSettings = false;
-    advanceShowSettings.onclick = function (evt) {
-      if (visibleSettings) {
-        advanceSettingIndexInput.style.display = 'none';
-        advanceSettingTypeInput.style.display = 'none';
-        advanceSettingPwdInput.style.display = 'none';
-      } else {
-        advanceSettingIndexInput.style.display = 'inline';
-        advanceSettingTypeInput.style.display = 'inline';
-        advanceSettingPwdInput.style.display = 'inline';
-      }
-      visibleSettings = !visibleSettings;
-    };
+  //   const advanceDownload = createAdvanceDownload(advanceLinkInput);
+  //   const advanceShowSettings = btnDefault();
+  //   advanceShowSettings.className = 'btn btn_custom btn_accent btn-icon btn-icon_settings';
+  //   var visibleSettings = false;
+  //   advanceShowSettings.onclick = function (evt) {
+  //     if (visibleSettings) {
+  //       advanceSettingIndexInput.style.display = 'none';
+  //       advanceSettingTypeInput.style.display = 'none';
+  //       advanceSettingPwdInput.style.display = 'none';
+  //     } else {
+  //       advanceSettingIndexInput.style.display = 'inline';
+  //       advanceSettingTypeInput.style.display = 'inline';
+  //       advanceSettingPwdInput.style.display = 'inline';
+  //     }
+  //     visibleSettings = !visibleSettings;
+  //   };
 
-    advanceRootDiv.style = 'margin-top:5px;margin-left:5px;';
+  //   advanceRootDiv.style = 'margin-top:5px;margin-left:5px;';
 
-    advanceRootDiv.appendChild(advanceLinkInput);
-    advanceRootDiv.appendChild(advanceLinkSubmit);
-    advanceRootDiv.appendChild(advanceLinkSign);
-    advanceRootDiv.appendChild(advanceDownload);
-    advanceRootDiv.appendChild(advanceShowSettings);
-    advanceRootDiv.appendChild(advanceSettingIndexInput);
-    advanceRootDiv.appendChild(advanceSettingTypeInput);
+  //   advanceRootDiv.appendChild(advanceLinkInput);
+  //   advanceRootDiv.appendChild(advanceLinkSubmit);
+  //   advanceRootDiv.appendChild(advanceLinkSign);
+  //   advanceRootDiv.appendChild(advanceDownload);
+  //   advanceRootDiv.appendChild(advanceShowSettings);
+  //   advanceRootDiv.appendChild(advanceSettingIndexInput);
+  //   advanceRootDiv.appendChild(advanceSettingTypeInput);
     
-    advanceRootDiv.appendChild(advanceSettingPwdInput);
+  //   advanceRootDiv.appendChild(advanceSettingPwdInput);
 
-    parentDiv.parentElement.appendChild(advanceRootDiv);
-  }
+  //   parentDiv.parentElement.appendChild(advanceRootDiv);
+  // }
 
 
   function parseUrl(urlText) {
@@ -168,44 +168,44 @@
     }, 'Документ успешно опубликован.');
   }
 
-  function createAdvanceLinkInput() {
-    const el = inputDefault();
-    el.placeholder = 'Укажите Advance ссылку на документ...';
-    el.id = 'advanceLinkInput';
-    return el;
-  }
+  // function createAdvanceLinkInput() {
+  //   const el = inputDefault();
+  //   el.placeholder = 'Укажите Advance ссылку на документ...';
+  //   el.id = 'advanceLinkInput';
+  //   return el;
+  // }
 
-  function createAdvanceSettingInput(id, placeholder) {
-    const el = inputDefault(false);
-    el.placeholder = placeholder;
-    el.id = id;
-    el.style = 'max-width:75px;margin-left:5px;';
-    el.style.display = 'none';
-    el.value = localStorage.getItem(el.id) || '';
-    el.onchange = function (evt) {
-      localStorage.setItem(el.id, el.value);
-    };
+  // function createAdvanceSettingInput(id, placeholder) {
+  //   const el = inputDefault(false);
+  //   el.placeholder = placeholder;
+  //   el.id = id;
+  //   el.style = 'max-width:75px;margin-left:5px;';
+  //   el.style.display = 'none';
+  //   el.value = localStorage.getItem(el.id) || '';
+  //   el.onchange = function (evt) {
+  //     localStorage.setItem(el.id, el.value);
+  //   };
 
-    return el;
-  }
+  //   return el;
+  // }
 
-  function inputDefault(withStyle = true) {
-    const el = document.createElement('input');
-    if (withStyle) {
-      el.style = 'min-width:275px;margin-left:5px;';
-    }
-    return el;
-  }
+  // function inputDefault(withStyle = true) {
+  //   const el = document.createElement('input');
+  //   if (withStyle) {
+  //     el.style = 'min-width:275px;margin-left:5px;';
+  //   }
+  //   return el;
+  // }
 
-  function createAdvanceLinkSubmit(input) {
-    const el = btnDefault();
-    el.id = 'btnSubmit';
-    el.innerText = 'Отправить';
-    el.onclick = function (evt) {
-      return sendDocument(input.value);
-    };
-    return el;
-  }
+  // function createAdvanceLinkSubmit(input) {
+  //   const el = btnDefault();
+  //   el.id = 'btnSubmit';
+  //   el.innerText = 'Отправить';
+  //   el.onclick = function (evt) {
+  //     return sendDocument(input.value);
+  //   };
+  //   return el;
+  // }
 
   function downloadDocument(url) {
       const urlParams = parseUrl(url);
@@ -260,7 +260,7 @@
   }
 
   
-  main();
+  // main();
   console.log('srd end :>> ');
 
   export {

@@ -54,6 +54,10 @@ function openOptionsPage() {
 
     </div>
 
+  <!-- <Spinner class="absolute top-1/2 left-1/2" /> -->
+
+  <!-- <Dimmer opacity="90"/> -->
+  <!-- class="absolute top-0 left-0 w-100 h-100 " -->
 
   <!-- </main> -->
 </template>

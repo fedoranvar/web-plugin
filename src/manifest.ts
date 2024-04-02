@@ -41,56 +41,67 @@ export async function getManifest() {
       128: './assets/icon-512.png',
     },
 
-  "permissions": [
+    "permissions": [
       'activeTab',
-    "webRequest",
-    "storage",
-    "menus",
-    "tabs"
-  ],
+      "webRequest",
+      "storage",
+      "menus",
+      "tabs"
+    ],
     host_permissions: ['*://*/*'],
     content_scripts: [
-      {
-        matches: [
-          // '<all_urls>',
-          "https://srd.fsa.gov.ru/srd"
-        ],
-        js: [
-          'dist/contentScripts/index.global.js',
-        ],
-      },
       {
         "matches": [
           "https://*.advance-docs.ru/Assistant",
           "https://*.adv-docs.ru/Assistant"
         ],
         "js": [
-          "dist/docs/content_assistant.js",
-          "dist/docs/actions_assistant.js"
+          // "dist/docs/assistant/content.js",
+          // "dist/docs/assistant/actions.js",
+          "dist/docs/assistant.js",
         ],
-        // "css": [
-        //   "advance/style/content_assistant.css"
-        // ]
       },
-      // {
-      //   "matches": [
-      //     "https://srd.fsa.gov.ru/srd"
-      //   ],
-      //   "js": [
-      //     // "dist/utils/spiner/init.js",
-      //     "dist/fgis/index.fgis.js"
-      //   ],
-      //   // "css": [
-      //   //   "utils/spiner/style.css",
-      //   //   "fgis/style.css"
-      //   // ]
-      // }
-
+      {
+        "matches": [
+          "https://srd.fsa.gov.ru/srd"
+        ],
+        "js": [
+          "dist/fgis/srd.js"
+        ],
+      },
+    {
+      "matches": [
+        "https://*.advance-docs.ru/Claim/Edit/*",
+        "https://*.adv-docs.ru/Claim/Edit/*"
+      ],
+      "js": [
+        "dist/docs/claim.js"
+      ]
+    },
+      
+    {
+      "matches": [
+        "https://*.advance-docs.ru/Replication/Processed*",
+        "https://*.adv-docs.ru/Replication/Processed*"
+      ],
+      "js": [
+        // "dist/docs/browser-*",
+        "dist/docs/replication.js",
+      ]
+    },
+    // {
+    //   "matches": [
+    //     "http://esep.fsa.gov.ru/ESEP-WebApp/sign/preview/*"
+    //   ],
+    //   "js": [
+    //     "dist/fgis/esep/content.js"
+    //   ]
+    // }
     ],
 
     web_accessible_resources: [
       {
-        resources: ['dist/contentScripts/style.css'],
+        resources: ['dist/fgis/style.css'],
         matches: ['<all_urls>'],
       },
     ],
