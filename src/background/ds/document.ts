@@ -280,6 +280,7 @@ class Document {
         return { done: true };
       })
       .catch((err) => {
+        // TODO: здесь ошибка
         console.log('something wrong in statement sign', err);
         return this.markAdvance('SignError', err).then(() => {
           throw err;

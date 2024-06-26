@@ -5,7 +5,7 @@ const docLink = useWebExtensionStorage('docLink', '')
 const docPin = useWebExtensionStorage('docPin', '')
 const docType = useWebExtensionStorage('docType', '')
 const docIndex = useWebExtensionStorage('docIndex', '')
-const canSign = useWebExtensionStorage('fgisDocsCanSign', false)
+const canSign = useWebExtensionStorage('fgisDocsCanSign', true)
 
 
 export {

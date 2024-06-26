@@ -1,21 +1,17 @@
-import {Token}  from "./token"
-import {Ds}  from "./ds/ds_main"
-// import {Parser} from "./parser"
-
-
-// var browser = require("webextension-polyfill");
-
-console.log('ya tut')
-
-var token = new Token();
-token.start();
 var settings = {};
-var awaitMessage = [];
-var stateMessage = [];
 var portFromCS;
 var replication_page;
 var lucky_bot;
 var lucky_bot_connectors = [];
+
+
+import  {Envi} from "./variables";
+
+import { Token } from "./token"
+import { Ds } from "./ds/main"
+
+var token = new Token();
+token.start();
 
 function test() {
   try {
@@ -52,7 +48,7 @@ function test() {
 function replication_page_connecter(p) {
   console.log("Background", p);
   replication_page = p;
-  replication_page.onMessage.addListener(function (m) {
+  replication_page.onMessage.addListener(function(m) {
     console.log("Background m", m);
     return true;
   });
@@ -69,7 +65,7 @@ function lucky_bot_connecter(p) {
     lucky_bot_connectors.push(p);
   }
   p = p;
-  p.onMessage.addListener(function (m) {
+  p.onMessage.addListener(function(m) {
     console.log(lucky_bot_connectors, this);
     console.log(`${this.name} write`, m);
     return true;
@@ -85,25 +81,25 @@ function connected(p) {
     return lucky_bot_connecter(p);
   }
   portFromCS = p;
-  portFromCS.onMessage.addListener(function (m) {
+  portFromCS.onMessage.addListener(function(m) {
     if (m.type == "stateMessage") {
-      stateMessage.push(m);
+      Envi.stateMessage.push(m);
       return;
     }
-    var ob = awaitMessage.find(
+    var ob = Envi.awaitMessage.find(
       (el) => el.url == m.url && el.command == m.command
     );
     console.log(
       "In background script, received message from content script",
       m,
-      awaitMessage,
+      Envi.awaitMessage,
       ob
     );
     if (ob) {
       console.log("We await u maaan!" + m.url);
-      awaitMessage = awaitMessage.filter((item) => item != ob);
+      Envi.awaitMessage = Envi.awaitMessage.filter((item) => item != ob);
       console.log("Get this!", ob.responce);
-      this.portFromCS.postMessage(ob.responce);
+      portFromCS.postMessage(ob.responce);
     } else {
       console.log("We dont await message from this url:" + m.url);
     }
@@ -138,7 +134,7 @@ function handleMessage(request, sender, sendResponse) {
     // settings > настройки для ЭЦП
     originSettings.document_token = request.document_token;
     originSettings.assignRegNumber = true;
-    
+
   } else {
     if (settings.originSettings) {
       originSettings = settings.originSettings.filter(
@@ -168,8 +164,8 @@ function handleMessage(request, sender, sendResponse) {
       return true;
     }
     // return true
-  } 
-  
+  }
+
 
   console.log('request :>> ', request);
   switch (request.module) {
@@ -181,7 +177,7 @@ function handleMessage(request, sender, sendResponse) {
         mode: request.mode,
         settings: originSettings,
         advanceType: request.advanceType || request.type, // TODO: проверить если где то еще передача request.type
-        isSrd: request.isSrd == undefined?false:request.isSrd,
+        isSrd: request.isSrd == undefined ? false : request.isSrd,
       }
       var ds = new Ds(dsOptions);
       action = ds.doAction(request.action);
@@ -207,7 +203,7 @@ function handleMessage(request, sender, sendResponse) {
     });
 
 
-    console.log('-------- KONEC ')
+  console.log('-------- KONEC ')
   return true;
 }
 
@@ -223,3 +219,8 @@ browser.storage.onChanged.addListener((newSettings) => {
     }
   }
 });
+
+
+
+
+

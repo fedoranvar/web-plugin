@@ -17,26 +17,19 @@ export default defineConfig({
     watch: isDev
       ? {}
       : undefined,
-    outDir: r('extension/dist/background'),
+    outDir: r('extension/dist/fgis'),
     cssCodeSplit: false,
     emptyOutDir: false,
     sourcemap: isDev ? 'inline' : false,
-    // sourcemap: true,
-    minify: false,
     lib: {
-      entry: r('src/background/index.ts'),
+      entry: r('src/fgis/srd/index.ts'),
       name: packageJson.name,
       formats: ['iife'],
     },
     rollupOptions: {
       output: {
-        entryFileNames: 'index.mjs',
-        // name: "background",
+        entryFileNames: 'srd.js',
         extend: true,
-        // globals: {
-        //   "awaitMessage": [],
-        //   "stateMessage": []
-        // }
       },
     },
   },

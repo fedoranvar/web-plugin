@@ -6,25 +6,25 @@ import { setupApp } from '~/logic/common-setup'
 
 (() => {
 
-  const refNode = document.querySelector('.top_header .inner')
-  const rootNode = document.createElement("div")
-  rootNode.setAttribute('id', 'pluginReplication')
-
+  const container = document.createElement('div')
+  const root = document.createElement('div')
   // const shadowDOM = container.attachShadow?.({ mode: __DEV__ ? 'open' : 'closed' }) || container
-  // const shadowDOM =  rootNode
+  const shadowDOM = container
 
-  // const styleEl = document.createElement('link')
-  // styleEl.setAttribute('rel', 'stylesheet')
-  // styleEl.setAttribute('href', browser.runtime.getURL('dist/docs/style.css'))
-  // shadowDOM.appendChild(styleEl)
+  const styleEl = document.createElement('link')
+  styleEl.setAttribute('rel', 'stylesheet')
+  styleEl.setAttribute('href', browser.runtime.getURL('dist/docs/style.css'))
+  shadowDOM.appendChild(styleEl)
 
-  refNode?.parentNode?.insertBefore(rootNode, refNode.nextSibling)
+  shadowDOM.appendChild(root)
 
-  const mPoint = document.getElementById('pluginReplication')
-  const mTemplate = createApp(Replication)
+  // document.body.appendChild(container)
 
-  setupApp(mTemplate)
-  mTemplate.mount(mPoint)
+  document.querySelector('.condensed').insertBefore(container, document.querySelector('#table_processed'))
+
+  const app = createApp(Replication)
+  setupApp(app)
+  app.mount(root)
 
 })()
 

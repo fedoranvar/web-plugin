@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {canSign, docLink, docIndex, docType, docPin } from '~/logic/storage'
 
-import { sendDocument, downloadDocument, signDocument } from  '~/fgis/srd_import'
+import { sendDocument, downloadDocument, signDocument } from  '~/fgis/srd/actions'
 
 function openOptionsPage() {
   browser.runtime.openOptionsPage()

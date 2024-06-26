@@ -20,15 +20,16 @@ export default defineConfig({
     outDir: r('extension/dist/fgis'),
     cssCodeSplit: false,
     emptyOutDir: false,
-    sourcemap: isDev ? 'inline' : false,
+    minify: false,
+    // sourcemap: isDev ? 'inline' : false,
     lib: {
-      entry: r('src/fgis/index.ts'),
+      entry: r('src/fgis/esep/index.ts'),
       name: packageJson.name,
       formats: ['iife'],
     },
     rollupOptions: {
       output: {
-        entryFileNames: 'srd.js',
+        entryFileNames: 'esep.js',
         extend: true,
       },
     },

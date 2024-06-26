@@ -1,4 +1,5 @@
-// var browser = require("webextension-polyfill");
+
+import  {Envi} from "../variables";
 
 function err(msg) {
   console.error(msg);
@@ -162,7 +163,7 @@ class Sign {
     });
   }
   signDocument() {
-    awaitMessage.push({
+    Envi.awaitMessage.push({
       url: this.logData.createsignui.response.url,
       command: 'loaded',
       responce: {
@@ -175,6 +176,7 @@ class Sign {
         pinCode: this.settings.pwdCertif,
       },
     });
+
     var masterTab;
     var is_remove = false;
     var self = this;
@@ -231,17 +233,18 @@ class Sign {
   checkMessage(url) {
     var count = 0;
     return new Promise((resolve, reject) => {
-      var f = function () {
-        var m = stateMessage.find((el) => el.command == 'signDone' && el.url == url);
+      var f = function() {
+        var m = Envi.stateMessage.find((el) => el.command == 'signDone' && el.url == url);
         if (m) {
-          stateMessage = stateMessage.filter((el) => el.command !== 'signDone' && el.url !== url);
+          Envi.stateMessage = Envi.stateMessage.filter((el) => el.command !== 'signDone' && el.url !== url);
           return resolve();
         } else {
-          var errMsg = stateMessage.find((el) => el.command == 'signError' && el.url == url);
+          var errMsg = Envi.stateMessage.find((el) => el.command == 'signError' && el.url == url);
           if (errMsg) {
             reject('ФГИС сломался : ' + errMsg.msg);
           }
           if (count >= 90) {
+            // TODO: застряли здесь на подписи
             reject('Превышен лимит ожидания подписи');
           } else {
             count += 1;
@@ -487,7 +490,7 @@ class Fgis {
     timeOut = Number(timeOut);
     var controller = new AbortController();
     var signal = controller.signal;
-    var p1 = new Promise(function (resolve, reject) {
+    var p1 = new Promise(function(resolve, reject) {
       setTimeout(() => {
         controller.abort();
         reject({
@@ -496,7 +499,7 @@ class Fgis {
         });
       }, timeOut);
     });
-    var p2 = new Promise(function (resolve, reject) {
+    var p2 = new Promise(function(resolve, reject) {
       fetch(url, params)
         .then((res) => resolve(res))
         .catch((err) => reject(err));
@@ -587,9 +590,8 @@ class Fgis {
                 default:
                   throw {
                     result: response,
-                    msg: `(JSON) Не известный код ошибки ( status :${
-                      response.status
-                    }): ${JSON.stringify(response)}`,
+                    msg: `(JSON) Не известный код ошибки ( status :${response.status
+                      }): ${JSON.stringify(response)}`,
                   };
               }
             });
@@ -614,9 +616,8 @@ class Fgis {
                 default:
                   throw {
                     result: obj,
-                    msg: `Не известная ошибка запроса ( code: ${obj.code}): ${
-                      obj.message ? obj.message : JSON.stringify(obj)
-                    }`,
+                    msg: `Не известная ошибка запроса ( code: ${obj.code}): ${obj.message ? obj.message : JSON.stringify(obj)
+                      }`,
                   };
               }
             }
@@ -642,8 +643,8 @@ class Fgis {
               maxRepeat >= this.repeatCount
             ) {
               var self = this;
-              return new Promise(function (resolve, reject) {
-                setTimeout(function () {
+              return new Promise(function(resolve, reject) {
+                setTimeout(function() {
                   return self
                     .fetch(o, opt, repeat, true, uuid)
                     .then((resp) => resolve(resp))

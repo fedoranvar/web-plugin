@@ -14,8 +14,7 @@ export async function getManifest() {
     version: pkg.version,
     description: pkg.description,
     action: {
-      // default_icon: './assets/icon-512.png',
-      default_icon: './assets/logo_docs1.svg',
+      default_icon: './assets/icon-512.png',
       default_popup: './dist/popup/index.html',
     },
     options_ui: {
@@ -26,9 +25,19 @@ export async function getManifest() {
       ? {
         scripts: [
           'dist/background/index.mjs',
-          // 'dist/background/index.mjs',
-          // 'dist/background/token.mjs',
-          // 'dist/background/parser.mjs',
+          
+          // "back/browser-polyfill.js",
+          // "back/main_controller/worker/main.js",
+          // "back/ds/worker/document.js",
+          // "back/ds/worker/ds_statement.js",
+          // "back/ds/worker/ds_main.js",
+          // "back/ds/worker/ds_fgis.js",
+          // "back/ds/worker/ds_advance.js",
+          // "back/fgis/worker/token.js",
+          // "back/fgis/worker/parser.js",
+          // "back/fgis/worker/test_fun.js",
+          // "back/background.js"
+
         ],
         type: 'module',
       }
@@ -56,8 +65,6 @@ export async function getManifest() {
           "https://*.adv-docs.ru/Assistant"
         ],
         "js": [
-          // "dist/docs/assistant/content.js",
-          // "dist/docs/assistant/actions.js",
           "dist/docs/assistant.js",
         ],
       },
@@ -69,40 +76,53 @@ export async function getManifest() {
           "dist/fgis/srd.js"
         ],
       },
-    {
-      "matches": [
-        "https://*.advance-docs.ru/Claim/Edit/*",
-        "https://*.adv-docs.ru/Claim/Edit/*"
-      ],
-      "js": [
-        "dist/docs/claim.js"
-      ]
-    },
-      
-    {
-      "matches": [
-        "https://*.advance-docs.ru/Replication/Processed*",
-        "https://*.adv-docs.ru/Replication/Processed*"
-      ],
-      "js": [
-        // "dist/docs/browser-*",
-        "dist/docs/replication.js",
-      ]
-    },
-    // {
-    //   "matches": [
-    //     "http://esep.fsa.gov.ru/ESEP-WebApp/sign/preview/*"
-    //   ],
-    //   "js": [
-    //     "dist/fgis/esep/content.js"
-    //   ]
-    // }
+      {
+        "matches": [
+          "https://*.advance-docs.ru/Claim/Edit/*",
+          "https://*.adv-docs.ru/Claim/Edit/*"
+        ],
+        "js": [
+          "dist/docs/claim.js"
+        ]
+      },
+
+      {
+        "matches": [
+          "https://*.advance-docs.ru/Replication/Processed*",
+          "https://*.adv-docs.ru/Replication/Processed*"
+        ],
+        "js": [
+          "dist/docs/replication.js",
+        ]
+      },
+      {
+        "matches": [
+          "http://esep.fsa.gov.ru/ESEP-WebApp/sign/preview/*"
+        ],
+        "js": [
+          "dist/fgis/esep.js"
+        ]
+      }
     ],
 
     web_accessible_resources: [
       {
-        resources: ['dist/fgis/style.css'],
-        matches: ['<all_urls>'],
+        resources: [
+          'dist/fgis/style.css',
+        ],
+        matches: [
+          "http://*.fsa.gov.ru/*",
+          "https://*.fsa.gov.ru/*",
+        ],
+      },
+      {
+        resources: [
+          'dist/docs/style.css',
+        ],
+        matches: [
+          "https://*.advance-docs.ru/*",
+          "https://*.adv-docs.ru/*"
+        ],
       },
     ],
     content_security_policy: {

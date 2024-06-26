@@ -129,7 +129,7 @@
       msg = 'Сохранение заявлений остановлено';
       alert(msg);
       location.reload();
-      return True;
+      return true;
     }
     var item = save_statement_queue[0];
     console.log('---------- Try ', item.id, item.type);
@@ -149,7 +149,7 @@
       }
       alert(msg);
       location.reload();
-      return True;
+      return true;
     }
     var item = save_document_queue[0];
     // sign_queue = sign_queue.splice(1)
